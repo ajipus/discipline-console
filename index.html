@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Discipline Console</title>
+    <link rel="stylesheet" href="styles.css?v=15" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Daily command center">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">DC</div>
+          <div>
+            <p class="eyebrow">Self-management</p>
+            <h1>Discipline Console</h1>
+          </div>
+        </div>
+
+        <div class="date-card">
+          <span id="todayLabel">Today</span>
+          <strong id="dateLabel"></strong>
+          <small>Automation engineer · CS thesis · English · Python</small>
+        </div>
+
+        <nav class="nav-list" aria-label="Dashboard sections">
+          <a href="#mission">Mission</a>
+          <a href="#today">Daily goals</a>
+          <a href="#calendar">Calendar</a>
+          <a href="#kpi">KPI</a>
+          <a href="#pomodoro">Pomodoro</a>
+          <a href="#english">English</a>
+          <a href="#python">Python</a>
+          <a href="#thesis">Thesis</a>
+          <a href="#study">Study focus</a>
+          <a href="#health">Health</a>
+          <a href="#notes">Reflection</a>
+        </nav>
+      </aside>
+
+      <main>
+        <section class="topbar" id="mission">
+          <div>
+            <p class="eyebrow">Current operating mode</p>
+            <h2>Improve 1% every day, with evidence.</h2>
+          </div>
+          <button id="resetDay" class="ghost-button" type="button">Reset today</button>
+        </section>
+
+        <section class="hero-grid">
+          <div class="hero-panel">
+            <div class="factory-visual" aria-label="Manufacturing automation illustration">
+              <div class="rail"></div>
+              <div class="arm arm-one"></div>
+              <div class="arm arm-two"></div>
+              <div class="bolt bolt-a"></div>
+              <div class="bolt bolt-b"></div>
+              <div class="bolt bolt-c"></div>
+              <div class="pulse pulse-one"></div>
+              <div class="pulse pulse-two"></div>
+            </div>
+            <div class="hero-copy">
+              <p class="eyebrow">Primary objectives</p>
+              <h2>English fluency, Python mastery, thesis completion, and disciplined health.</h2>
+              <p>Track small daily wins across work, study, and personal systems without turning your life into a spreadsheet labyrinth.</p>
+            </div>
+          </div>
+
+          <div class="score-panel" aria-live="polite">
+            <span class="score-label">Today’s discipline score</span>
+            <strong id="scoreValue">0%</strong>
+            <div class="progress-track">
+              <div id="scoreBar" class="progress-fill"></div>
+            </div>
+            <p id="scoreMessage">Start with one checked action.</p>
+          </div>
+
+          <div class="streak-panel" aria-live="polite">
+            <span class="score-label">Discipline streak</span>
+            <div class="streak-main">
+              <strong id="currentStreak">0</strong>
+              <span>days</span>
+            </div>
+            <div class="streak-stats">
+              <div>
+                <small>Best Streak</small>
+                <strong id="bestStreak">0</strong>
+              </div>
+              <div>
+                <small>Level</small>
+                <strong id="disciplineLevel">Beginner</strong>
+              </div>
+            </div>
+            <p id="streakMessage">Complete every main goal to start the streak.</p>
+          </div>
+        </section>
+
+        <section class="section-grid" id="today">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Daily execution</p>
+              <h2>Goals for today</h2>
+            </div>
+            <button id="addGoalBlock" class="primary-button" type="button">Add goal block</button>
+          </div>
+          <div class="goal-board" id="goalBoard"></div>
+        </section>
+
+        <section class="panel calendar-panel" id="calendar">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Planning calendar</p>
+              <h2>Calendar goals</h2>
+            </div>
+            <div class="calendar-controls">
+              <button id="prevMonth" class="ghost-button" type="button">Prev</button>
+              <strong id="calendarMonthLabel"></strong>
+              <button id="nextMonth" class="ghost-button" type="button">Next</button>
+            </div>
+          </div>
+
+          <div class="calendar-layout">
+            <div class="calendar-board">
+              <div class="calendar-weekdays" aria-hidden="true">
+                <span>Sun</span>
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+              </div>
+              <div class="calendar-grid" id="calendarGrid"></div>
+            </div>
+
+            <div class="calendar-editor">
+              <p class="eyebrow">Selected date</p>
+              <h3 id="selectedDateLabel"></h3>
+              <textarea id="calendarGoalInput" rows="8" placeholder="Enter goals for this date, one goal per line."></textarea>
+              <div class="calendar-actions">
+                <button id="saveCalendarGoals" class="primary-button" type="button">Save goals</button>
+                <button id="clearCalendarGoals" class="ghost-button" type="button">Clear</button>
+              </div>
+              <div class="calendar-preview" id="calendarGoalPreview"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel kpi-panel" id="kpi">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Monthly review</p>
+              <h2>Monthly KPI Dashboard</h2>
+            </div>
+            <span id="kpiMonthLabel" class="status-pill">This month</span>
+          </div>
+          <div class="kpi-grid" id="kpiGrid"></div>
+        </section>
+
+        <section class="panel pomodoro-panel" id="pomodoro">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Focused execution</p>
+              <h2>Pomodoro Focus System</h2>
+            </div>
+            <span id="pomodoroModeLabel" class="status-pill">25 min focus</span>
+          </div>
+
+          <div class="pomodoro-layout">
+            <div class="timer-surface">
+              <div class="timer-display" id="timerDisplay">25:00</div>
+              <div class="timer-presets" aria-label="Timer presets">
+                <button class="timer-preset is-active" data-mode="focus25" type="button">25 Focus</button>
+                <button class="timer-preset" data-mode="break5" type="button">5 Break</button>
+                <button class="timer-preset" data-mode="focus50" type="button">50 Focus</button>
+                <button class="timer-preset" data-mode="custom" type="button">Custom</button>
+              </div>
+              <label class="custom-timer">
+                Custom minutes
+                <input id="customTimerInput" type="number" min="1" max="240" step="1" value="30" />
+              </label>
+              <div class="timer-actions">
+                <button id="startTimer" class="primary-button" type="button">Start</button>
+                <button id="pauseTimer" class="ghost-button" type="button">Pause</button>
+                <button id="resetTimer" class="ghost-button" type="button">Reset</button>
+              </div>
+            </div>
+
+            <div class="focus-stats">
+              <div class="focus-stat-card">
+                <small>Daily Focus Hours</small>
+                <strong id="dailyFocusHours">0.0</strong>
+              </div>
+              <div class="focus-stat-card">
+                <small>Weekly Focus Hours</small>
+                <strong id="weeklyFocusHours">0.0</strong>
+              </div>
+              <div class="focus-stat-card">
+                <small>Monthly Focus Hours</small>
+                <strong id="monthlyFocusHours">0.0</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="focus-charts">
+            <div class="chart-panel">
+              <h3>Daily Focus Chart</h3>
+              <div class="bar-chart" id="dailyFocusChart"></div>
+            </div>
+            <div class="chart-panel">
+              <h3>Weekly Focus Chart</h3>
+              <div class="bar-chart" id="weeklyFocusChart"></div>
+            </div>
+            <div class="chart-panel">
+              <h3>Monthly Focus Chart</h3>
+              <div class="bar-chart" id="monthlyFocusChart"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel english-panel" id="english">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Language growth</p>
+              <h2>English Learning Dashboard</h2>
+            </div>
+            <span id="englishLevelStatus" class="status-pill">A1 to B1</span>
+          </div>
+
+          <div class="english-layout">
+            <div class="english-metrics" id="englishMetrics"></div>
+            <div class="cefr-panel">
+              <div class="cefr-selectors">
+                <label>
+                  Current level
+                  <select id="currentCefrLevel">
+                    <option>A1</option>
+                    <option>A2</option>
+                    <option>B1</option>
+                    <option>B2</option>
+                    <option>C1</option>
+                    <option>C2</option>
+                  </select>
+                </label>
+                <label>
+                  Target level
+                  <select id="targetCefrLevel">
+                    <option>A1</option>
+                    <option>A2</option>
+                    <option>B1</option>
+                    <option>B2</option>
+                    <option>C1</option>
+                    <option>C2</option>
+                  </select>
+                </label>
+              </div>
+              <div class="cefr-roadmap" id="cefrRoadmap"></div>
+            </div>
+          </div>
+
+          <div class="english-charts">
+            <div class="chart-panel">
+              <h3>Weekly English Chart</h3>
+              <div class="stacked-chart" id="weeklyEnglishChart"></div>
+            </div>
+            <div class="chart-panel">
+              <h3>Monthly English Chart</h3>
+              <div class="stacked-chart" id="monthlyEnglishChart"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel python-panel" id="python">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Programming growth</p>
+              <h2>Python Learning Roadmap</h2>
+            </div>
+            <span id="pythonCompletionBadge" class="status-pill">0% complete</span>
+          </div>
+
+          <div class="roadmap-summary">
+            <div>
+              <small>Roadmap Completion</small>
+              <strong id="pythonCompletionValue">0%</strong>
+            </div>
+            <div class="roadmap-progress-track">
+              <div id="pythonCompletionBar" class="roadmap-progress-fill"></div>
+            </div>
+          </div>
+
+          <div class="python-roadmap-grid" id="pythonRoadmapGrid"></div>
+        </section>
+
+        <section class="panel thesis-panel" id="thesis">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Research execution</p>
+              <h2>Thesis Tracker</h2>
+            </div>
+            <span id="deadlineCountdown" class="status-pill">Set deadline</span>
+          </div>
+
+          <div class="thesis-summary">
+            <div>
+              <small>Completion</small>
+              <strong id="thesisCompletionValue">0%</strong>
+            </div>
+            <div>
+              <small>Remaining Tasks</small>
+              <strong id="thesisRemainingValue">8</strong>
+            </div>
+            <label>
+              Thesis deadline
+              <input id="thesisDeadlineInput" type="date" />
+            </label>
+          </div>
+
+          <div class="roadmap-progress-track thesis-progress-track">
+            <div id="thesisCompletionBar" class="roadmap-progress-fill"></div>
+          </div>
+
+          <div class="thesis-layout">
+            <div class="thesis-stage-grid" id="thesisStageGrid"></div>
+            <div class="meeting-panel">
+              <div class="meeting-header">
+                <h3>Supervisor Meeting History</h3>
+                <button id="addMeeting" class="primary-button" type="button">Add meeting</button>
+              </div>
+              <div class="meeting-form">
+                <input id="meetingDateInput" type="date" />
+                <textarea id="meetingNoteInput" rows="4" placeholder="Meeting notes, feedback, and next action."></textarea>
+              </div>
+              <div class="meeting-list" id="meetingList"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="two-column">
+          <div class="panel" id="study">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Deep work</p>
+                <h2>Focus blocks</h2>
+              </div>
+              <button id="addBlock" class="icon-button" type="button" title="Add focus block">+</button>
+            </div>
+            <div id="focusBlocks" class="focus-list"></div>
+          </div>
+
+          <div class="panel" id="health">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">Body system</p>
+                <h2>Health metrics</h2>
+              </div>
+              <span id="healthStatus" class="status-pill">Ready</span>
+            </div>
+            <div class="metric-grid">
+              <label>
+                Sleep actual
+                <input id="sleepInput" type="number" min="0" max="12" step="0.5" />
+                <span>hours</span>
+              </label>
+              <label>
+                Water actual
+                <input id="waterInput" type="number" min="0" max="12" step="1" />
+                <span>glasses</span>
+              </label>
+              <label>
+                Exercise actual
+                <input id="exerciseInput" type="number" min="0" max="180" step="5" />
+                <span>minutes</span>
+              </label>
+            </div>
+
+            <div class="health-alignment">
+              <h3>Health alignment</h3>
+              <div class="target-status-grid" id="targetStatusGrid" aria-live="polite"></div>
+              <div class="metric-grid target-grid">
+                <label>
+                  Sleep target
+                  <input id="sleepGoalInput" type="number" min="0" max="12" step="0.5" />
+                  <span>hours</span>
+                </label>
+                <label>
+                  Water target
+                  <input id="waterGoalInput" type="number" min="0" max="12" step="1" />
+                  <span>glasses</span>
+                </label>
+                <label>
+                  Exercise target
+                  <input id="exerciseGoalInput" type="number" min="0" max="180" step="5" />
+                  <span>minutes</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel reflection-panel" id="notes">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">End-of-day inspection</p>
+              <h2>Reflection</h2>
+            </div>
+            <button id="saveNote" class="primary-button" type="button">Save</button>
+          </div>
+          <textarea id="reflectionInput" rows="5" placeholder="What did I improve today? What blocked me? What is tomorrow's first action?"></textarea>
+          <div class="reflection-log" id="reflectionLog"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js?v=15"></script>
+  </body>
+</html>
