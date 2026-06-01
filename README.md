@@ -1,5 +1,7 @@
 # Discipline Console
 
+<img width="1919" height="1076" alt="image" src="https://github.com/user-attachments/assets/929ef97c-c0c1-45ae-b0fb-92fc23d1ac47" />
+
 > Improve 1% every day, with evidence.
 
 Discipline Console is a personal management dashboard designed to help individuals manage their goals, habits, productivity, learning progress, health, and personal growth in a single platform.
