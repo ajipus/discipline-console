@@ -105,13 +105,7 @@ The dashboard provides:
 
 - React
 - TypeScript
-- Vite
 - CSS / Modern UI Components
-
-### Planned Backend
-
-- NestJS
-- PostgreSQL
 
 ### Development Tools
 
